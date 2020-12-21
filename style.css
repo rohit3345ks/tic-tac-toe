@@ -1,0 +1,131 @@
+/* A basic reset */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Defining Variables */
+:root{
+    --cell-size: 60px;
+    --mark-size: calc(var(--cell-size)*0.8);
+}
+
+/* Positioning the Tic tac toe board to center of webpage */
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Board Creation and styling */
+.board
+{
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-flow: row wrap;
+}
+#cell{
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Removing Space */
+.row2,.row3
+{
+    margin-top: -2px;
+}
+
+/* Removing Side borders */
+.row1
+{
+    border-top: none !important;
+}
+.row3
+{
+    border-bottom: none !important;
+}
+#cell:nth-child(3n)
+{
+    border-right: none !important;
+}
+#cell:nth-child(3n+1){
+    border-left: none !important;
+}
+
+#cell.x::before,#cell.x::after,
+#cell.circle::before
+{
+    background-color: black;
+}
+/* Hover Coloring */
+.board.x #cell:not(.x):not(.circle):hover::before,
+.board.x #cell:not(.x):not(.circle):hover::after,
+.board.circle #cell:not(.x):not(.circle):hover::before
+{
+    background-color: lightgrey;
+}
+/* Making the Cross(X) sign */
+#cell.x::before,#cell.x::after,
+.board.x #cell:not(.x):not(.circle):hover::before,#cell:not(.x):not(.circle):hover::after
+{
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size)*.15);
+    height: var(--mark-size);
+    border-radius: 3px;
+
+}
+
+#cell.x::before,.board.x #cell:not(.x):not(.circle):hover::before
+{
+    transform: rotate(45deg);
+}
+#cell.x::after,
+.board.x #cell:not(.x):not(.circle):hover::after
+{
+    transform: rotate(-45deg);
+}
+/* Making the Circle */
+#cell.circle::before,#cell.circle::after,
+.board.circle #cell:not(.x):not(.circle):hover::before,
+.board.circle #cell:not(.x):not(.circle):hover::after
+{
+    content: '';
+    position: absolute;
+}
+
+#cell.circle::before,
+.board.circle #cell:not(.x):not(.circle):hover::before{
+    border-radius: 50%;
+    width: calc(var(--mark-size)*.9);
+    height: calc(var(--mark-size)*.9);
+}
+#cell.circle::after,
+.board.circle #cell:not(.x):not(.circle):hover::after
+{
+    border-radius: 50%;
+    background-color: white;
+    width: calc(var(--mark-size)*0.7);
+    height: calc(var(--mark-size)*0.7);
+}
+
+/* Cursor Styling  */
+#cell.x,#cell.circle
+{
+    cursor: not-allowed !important;
+}
+#cell
+{
+    cursor: pointer;
+}
+
